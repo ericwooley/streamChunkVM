@@ -11,7 +11,7 @@
     "videostream": "./bin/video-streamer.js"
   },
   "scripts": {
-    "test": "node bin/cli.js",
+    "test": "node bin/video-streamer.js",
     "start": "babel video-streamer.js --watch --out-file bin/video-streamer.js"
   },
   "devDependencies": {
@@ -28,6 +28,6 @@
     "glob": "^5.0.10",
     "pretty-bytes": "^2.0.1",
     "prompt": "^0.2.14",
-    "webtorrent": "^0.48.5"
+    "webtorrent": "0.3.0"
   }
 }
