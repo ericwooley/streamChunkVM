@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 sudo apt-get update;
-sudo apt-get -y install build-essential libpcre3 libpcre3-dev libssl-dev unzip make ffmpeg libavcodec-extra-53 python-software-properties
+sudo apt-get -y install curl build-essential libpcre3 libpcre3-dev libssl-dev unzip make ffmpeg libavcodec-extra-53 python-software-properties
 sudo add-apt-repository ppa:jon-severinsson/ffmpeg;
+sudo add-apt-repository ppa:chris-lea/node.js
 sudo apt-get update;
-sudo apt-get install -y ffmpeg frei0r-plugins;
+sudo apt-get install -y ffmpeg frei0r-plugins nodejs;
 
 
 wget http://nginx.org/download/nginx-1.9.1.tar.gz
@@ -16,7 +17,6 @@ make
 sudo make install
 sudo /usr/local/nginx/sbin/nginx
 chmod +x /vagrant/process.sh
-#&& ffmpeg -i $path -vcodec copy $dirname/$basename.mp4 && rm $path;
 cat <<EOT >> /usr/local/nginx/conf/nginx.conf
 user root;
 rtmp {

@@ -28,6 +28,6 @@
     "glob": "^5.0.10",
     "pretty-bytes": "^2.0.1",
     "prompt": "^0.2.14",
-    "webtorrent": "0.3.0"
+    "webtorrent": "^0.48.5"
   }
 }
