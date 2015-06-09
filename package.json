@@ -21,7 +21,8 @@
     "babel-loader": "^5.1.4",
     "babel-runtime": "^5.5.4",
     "eslint": "^0.20.0",
-    "eslint-loader": "^0.11.2"
+    "eslint-loader": "^0.11.2",
+    "webtorrent-hybrid": "^0.38.2"
   },
   "dependencies": {
     "chokidar": "^1.0.3",

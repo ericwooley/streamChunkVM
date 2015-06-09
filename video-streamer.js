@@ -1,9 +1,8 @@
-// import fs from 'fs'
 import chokidar from 'chokidar'
 import prompt from 'prompt'
 import glob from 'glob'
 import fs from 'fs'
-import WebTorrent from 'webtorrent'
+import WebTorrent from 'webtorrent-hybrid'
 import prettyBytes from 'pretty-bytes'
 
 const client = new WebTorrent()
@@ -17,7 +16,7 @@ function getStats(torrent) {
 
   }
 }
-const fileGlob = 'OBSserver/streams/*.mp4'
+const fileGlob = 'streams/*.mp4'
 // contains list of all streams being seeded
 const torrentList = []
 function addTorrent(file) {

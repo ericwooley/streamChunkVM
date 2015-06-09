@@ -1,4 +1,3 @@
-// import fs from 'fs'
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -19,15 +18,15 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
-var _webtorrent = require('webtorrent');
+var _webtorrentHybrid = require('webtorrent-hybrid');
 
-var _webtorrent2 = _interopRequireDefault(_webtorrent);
+var _webtorrentHybrid2 = _interopRequireDefault(_webtorrentHybrid);
 
 var _prettyBytes = require('pretty-bytes');
 
 var _prettyBytes2 = _interopRequireDefault(_prettyBytes);
 
-var client = new _webtorrent2['default']();
+var client = new _webtorrentHybrid2['default']();
 function getStats(torrent) {
   var progress = torrent ? (100 * torrent.downloaded / torrent.parsedTorrent.length).toFixed(1) : 0;
   return {
@@ -38,7 +37,7 @@ function getStats(torrent) {
 
   };
 }
-var fileGlob = 'OBSserver/streams/*.mp4';
+var fileGlob = 'streams/*.mp4';
 // contains list of all streams being seeded
 var torrentList = [];
 function addTorrent(file) {
