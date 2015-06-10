@@ -23,7 +23,7 @@ const fileGlob = 'streams/*.processed.mp4'
 // contains list of all streams being seeded
 const torrentList = []
 function addTorrent(file) {
-  setTimeout(() =>{
+  setTimeout(() => {
     client.seed(file, (torrent) => {
       torrentList.push(torrent.infoHash)
       console.log(`
