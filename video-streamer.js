@@ -6,19 +6,9 @@ import WebTorrent from 'webtorrent-hybrid'
 import prettyBytes from 'pretty-bytes'
 import moment from 'moment'
 
+
+console.log('Initilizing')
 const client = new WebTorrent()
-process.on('SIGINT  ', () => {
-  console.log('still alive')
-  // console.log('')
-  // process.stdout.write('\n\nKilling active torrents')//()=>setTimeout(process.exit, 1000)
-  client.destroy(()=> process.stdout.write('Shut Down Complete'))
-  // let dots = ''
-  // setTimeout(() => {
-  //   warn(dots)
-  //   dots += '.'
-  // }, 100)
-  setTimeout(() => console.log('still alive'), 100)
-})
 function getStats(torrent) {
   const progress = torrent ? (100 * torrent.downloaded / torrent.parsedTorrent.length).toFixed(1) : 0
   return {
