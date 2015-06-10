@@ -1,10 +1,10 @@
-// import chokidar from 'chokidar'
-// import prompt from 'prompt'
-// import glob from 'glob'
-// import fs from 'fs'
-// import WebTorrent from 'webtorrent-hybrid'
-// import prettyBytes from 'pretty-bytes'
-// import moment from 'moment'
+import chokidar from 'chokidar'
+import prompt from 'prompt'
+import glob from 'glob'
+import fs from 'fs'
+import WebTorrent from 'webtorrent-hybrid'
+import prettyBytes from 'pretty-bytes'
+import moment from 'moment'
 
 const client = new WebTorrent()
 process.on('SIGINT  ', () => {
