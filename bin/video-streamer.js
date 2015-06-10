@@ -1,80 +1,90 @@
+// import chokidar from 'chokidar'
+// import prompt from 'prompt'
+// import glob from 'glob'
+// import fs from 'fs'
+// import WebTorrent from 'webtorrent-hybrid'
+// import prettyBytes from 'pretty-bytes'
+// import moment from 'moment'
+
+// Start reading from stdin so we don't exit.
 'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+process.stdin.resume();
 
-var _chokidar = require('chokidar');
-
-var _chokidar2 = _interopRequireDefault(_chokidar);
-
-var _prompt = require('prompt');
-
-var _prompt2 = _interopRequireDefault(_prompt);
-
-var _glob = require('glob');
-
-var _glob2 = _interopRequireDefault(_glob);
-
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
-var _webtorrentHybrid = require('webtorrent-hybrid');
-
-var _webtorrentHybrid2 = _interopRequireDefault(_webtorrentHybrid);
-
-var _prettyBytes = require('pretty-bytes');
-
-var _prettyBytes2 = _interopRequireDefault(_prettyBytes);
-
-var client = new _webtorrentHybrid2['default']();
-function getStats(torrent) {
-  var progress = torrent ? (100 * torrent.downloaded / torrent.parsedTorrent.length).toFixed(1) : 0;
-  return {
-    peers: torrent ? torrent.swarm.wires.length : 0,
-    progress: progress,
-    downloadSpeed: (0, _prettyBytes2['default'])(client.downloadSpeed()),
-    uploadSpeed: (0, _prettyBytes2['default'])(client.uploadSpeed())
-
-  };
-}
-var fileGlob = 'streams/*.mp4';
-// contains list of all streams being seeded
-var torrentList = [];
-function addTorrent(file) {
-  console.log('adding', file);
-  client.seed(file, function (torrent) {
-    torrentList.push(torrent.infoHash);
-    console.log('\n====================================================================================\n      seeding torrent\', ' + torrent.infoHash + '\n      streamList ' + encodeURI(JSON.stringify(torrentList)) + '\n    ');
-  });
-}
-function beginWatchingStream() {
-  console.log('Waiting for stream files');
-  var watcher = _chokidar2['default'].watch(fileGlob);
-  watcher.on('add', addTorrent);
-}
-var question = {
-  properties: {
-    remove: {
-      message: 'Remove old stream files?',
-      'default': 'yes'
-    }
-  }
-};
-_prompt2['default'].start();
-_prompt2['default'].get(question, function (err, result) {
-  if (err) {
-    throw err;
-  }
-  if (result.remove.toLowerCase().indexOf('y') !== -1) {
-    var files = _glob2['default'].sync(fileGlob);
-    files.map(function (file) {
-      return _fs2['default'].unlinkSync(file);
-    });
-    console.log('Deleted ' + files.length + ' files');
-  }
-  setInterval(function () {
-    var stats = getStats();
-    process.stdout.write('\r' + stats.peers + ' peers | \\/ ' + stats.downloadSpeed + ' | /\\ ' + stats.uploadSpeed + ' uploadSpeed |');
-  }, 1000);
-  beginWatchingStream();
+process.on('SIGINT', function () {
+  console.log('Got SIGINT.  Press Control-D to exit.');
 });
+
+// const client = new WebTorrent()
+// process.on('SIGINT  ', () => {
+//   console.log('still alive')
+//   // console.log('')
+//   // process.stdout.write('\n\nKilling active torrents')//()=>setTimeout(process.exit, 1000)
+//   client.destroy(()=> process.stdout.write('Shut Down Complete'))
+//   // let dots = ''
+//   // setTimeout(() => {
+//   //   warn(dots)
+//   //   dots += '.'
+//   // }, 100)
+//   setTimeout(() => console.log('still alive'), 100)
+// })
+// function getStats(torrent) {
+//   const progress = torrent ? (100 * torrent.downloaded / torrent.parsedTorrent.length).toFixed(1) : 0
+//   return {
+//     peers: torrent ? torrent.swarm.wires.length : 0,
+//     progress,
+//     downloadSpeed: prettyBytes(client.downloadSpeed()),
+//     uploadSpeed: prettyBytes(client.uploadSpeed())
+
+//   }
+// }
+// const fileGlob = 'streams/*.processed.mp4'
+// // contains list of all streams being seeded
+// const torrentList = []
+// function addTorrent(file) {
+//   setTimeout(() =>{
+//     client.seed(file, (torrent) => {
+//       torrentList.push(torrent.infoHash)
+//       console.log(`
+//     ====================================================================================
+//           seeding torrent', ${torrent.infoHash}
+//           streamList ${encodeURI(JSON.stringify(torrentList))}
+//         `)
+//     })
+//   }, 10000)
+// }
+// function warn (dots) {
+//   console.warn('\rKilling active torrents' + dots)
+// }
+
+// function beginWatchingStream() {
+//   console.log('Waiting for stream files')
+//   let watcher = chokidar.watch(fileGlob)
+//   watcher.on('add', addTorrent)
+// }
+// const question = {
+//   properties: {
+//     remove: {
+//       message: 'Remove old stream files?',
+//       default: 'yes'
+//     }
+//   }
+// }
+// prompt.start()
+// prompt.get(question, (err, result) => {
+//   if(err) {
+//     throw err
+//   }
+//   if(result.remove.toLowerCase().indexOf('y') !== -1){
+//     const files = glob.sync(fileGlob)
+//     files.map((file) => fs.unlinkSync(file))
+//     console.log(`Deleted ${ files.length } files`)
+//   }
+//   setInterval(() => {
+//     const stats = getStats()
+//     if(torrentList.length) {
+//       process.stdout.write('\r' + moment().format('HH:mm:ss a') + ` | ${torrentList.length} torrents | ${stats.peers} peers | ↓ ${stats.downloadSpeed} | ↑ ${stats.uploadSpeed} uploadSpeed |`)
+//     }
+//   }, 100 )
+//   beginWatchingStream()
+// })

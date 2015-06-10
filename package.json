@@ -22,6 +22,8 @@
     "babel-runtime": "^5.5.4",
     "eslint": "^0.20.0",
     "eslint-loader": "^0.11.2",
+    "eslint-plugin-react": "^2.5.0",
+    "moment": "^2.10.3",
     "webtorrent-hybrid": "^0.38.2"
   },
   "dependencies": {
