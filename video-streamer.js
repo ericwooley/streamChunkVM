@@ -7,8 +7,28 @@ import prettyBytes from 'pretty-bytes'
 import moment from 'moment'
 
 
-console.log('Initilizing')
 const client = new WebTorrent()
+function warn (dots = ''){
+  process.stdout.write('\rKilling active torrents' + dots)
+}
+process.on('SIGINT', () => {
+  console.log('shutting down (possible memory leak, because client.destroy never returns, try `killall node`)')
+  process.exit()
+  //()=>setTimeout(process.exit, 1000)
+  // console.log('\n')
+  // let dots = ''
+  // warn(dots)
+  // setInterval(() => {
+  //   warn(dots)
+  //   dots = dots + '.'
+  // }, 200)
+  // client.destroy(()=> {
+  //   console.log('Shut Down Complete')
+  //   /* eslint-disable */
+  //   process.exit(0)
+  //   /* eslint-enable */
+  // })
+})
 function getStats(torrent) {
   const progress = torrent ? (100 * torrent.downloaded / torrent.parsedTorrent.length).toFixed(1) : 0
   return {
@@ -23,7 +43,7 @@ const fileGlob = 'streams/*.processed.mp4'
 // contains list of all streams being seeded
 const torrentList = []
 function addTorrent(file) {
-  setTimeout(() => {
+  setTimeout(() =>{
     client.seed(file, (torrent) => {
       torrentList.push(torrent.infoHash)
       console.log(`
@@ -47,7 +67,7 @@ const question = {
   properties: {
     remove: {
       message: 'Remove old stream files?',
-      default: 'yes'
+      default: 'no'
     }
   }
 }

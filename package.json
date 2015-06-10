@@ -11,7 +11,7 @@
     "videostream": "./bin/video-streamer.js"
   },
   "scripts": {
-    "test": "node bin/video-streamer.js",
+    "test": "echo \"npm run exits without cleanup on ctrl+c try running `node bin/video-streamer.js`\" && exit",
     "start": "babel video-streamer.js --watch --out-file bin/video-streamer.js"
   },
   "devDependencies": {
@@ -24,7 +24,8 @@
     "eslint-loader": "^0.11.2",
     "eslint-plugin-react": "^2.5.0",
     "moment": "^2.10.3",
-    "webtorrent-hybrid": "^0.38.2"
+    "webtorrent-hybrid": "^0.38.2",
+    "wrtc": "^0.0.55"
   },
   "dependencies": {
     "chokidar": "^1.0.3",
